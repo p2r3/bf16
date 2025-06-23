@@ -17,7 +17,7 @@ if apt list --installed 2>/dev/null | grep -q "^${package_name}/"; then
     
 else
     echo "Package GCC is not detected, Installing now"
-    sudo apt install -y -q --show-progress build-essential
+    sudo apt install -y -q --show-progress gcc make libsdl2-dev
 fi
 
 echo "Setting up BF Runtime..."
