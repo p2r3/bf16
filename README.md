@@ -2,9 +2,12 @@
 The first ever *visual* Brainfuck runtime built for running interactive games.
 
 ## Usage
-In order to use this runtime, you will have to compile it using a Linux distribution. 
+In order to use this runtime, you will have to compile it under a Linux distribution or Windows. 
 
-### Requirements 
+### Requirements
+
+#### Linux
+
 A C compiler (`gcc`), `make` and Simple DirectMedia Layer (SDL2) development packages are required. 
 
 You can install them with one of the following commands. 
@@ -29,6 +32,10 @@ sudo pacman -S gcc make sdl2
 
 If your Linux distribution is immutable (such as Fedora Atomic, Bazzite or SteamOS), you can use [Distrobox](https://distrobox.it/). 
 
+#### Windows
+
+Visual Studio 2022 or later with the C++ and C development tools installed and vcpkg integration is required.
+
 ### Compiling 
 Simply run the following commands inside a personal directory. 
 
@@ -40,8 +47,19 @@ git clone https://github.com/p2r3/bf16
 cd bf16
 ```
 
+#### Linux
+
 ```bash
 make
+```
+
+#### Windows
+
+In Visual Studio Developer Command Prompt, run the following commands:
+
+```bash
+msbuild /p:Configuration="Release"
+msbuild /p:Configuration="Release Grayscale"
 ```
 
 This will produce two binaries — `bf16` and `bf16_grayscale`. The former uses an RGB332 palette, the latter renders in grayscale. Test with the programs under `examples/`. Note that `badapple.b` is best used with `bf16_grayscale`.
