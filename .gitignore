@@ -39,6 +39,8 @@ ipch/
 *.cachefile
 *.VC.db
 *.VC.VC.opendb
+*.bin
+*.binlog
 .vs/
 Generated\ Files/
 [Dd]ebug/

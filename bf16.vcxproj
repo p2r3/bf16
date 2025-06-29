@@ -65,6 +65,10 @@
 			<Platform>ARM64</Platform>
 		</ProjectConfiguration>
 	</ItemGroup>
+	<PropertyGroup>
+		<TargetName Condition="!$(Configuration.EndsWith('Grayscale'))">bf16</TargetName>
+		<TargetName Condition="$(Configuration.EndsWith('Grayscale'))">bf16_grayscale</TargetName>
+	</PropertyGroup>
 	<PropertyGroup Condition="$(Configuration.StartsWith('Debug'))" Label="Configuration">
 		<UseDebugLibraries>true</UseDebugLibraries>
 		<LinkIncremental>true</LinkIncremental>
