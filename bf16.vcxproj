@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup Label="Globals">
+		<Keyword>Win32Proj</Keyword>
+		<WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+		<Platform>x64</Platform>
+		<ProjectName>bf16</ProjectName>
+		<ProjectGuid>{655B2E6E-2765-E930-7650-42F94D4C7C87}</ProjectGuid>
+	</PropertyGroup>
+	<PropertyGroup Label="Configuration">
+		<ConfigurationType>Application</ConfigurationType>
+		<PlatformToolset>v143</PlatformToolset>
+		<CharacterSet>Unicode</CharacterSet>
+	</PropertyGroup>
+	<PropertyGroup>
+		<PreferredToolArchitecture>x64</PreferredToolArchitecture>
+	</PropertyGroup>
+	<ItemGroup Label="ProjectConfigurations">
+		<ProjectConfiguration Include="Debug|x64">
+			<Configuration>Debug</Configuration>
+			<Platform>x64</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Release|x64">
+			<Configuration>Release</Configuration>
+			<Platform>x64</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Debug|Win32">
+			<Configuration>Debug</Configuration>
+			<Platform>Win32</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Release|Win32">
+			<Configuration>Release</Configuration>
+			<Platform>Win32</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Debug|ARM64">
+			<Configuration>Debug</Configuration>
+			<Platform>ARM64</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Release|ARM64">
+			<Configuration>Release</Configuration>
+			<Platform>ARM64</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Debug Grayscale|x64">
+			<Configuration>Debug Grayscale</Configuration>
+			<Platform>x64</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Release Grayscale|x64">
+			<Configuration>Release Grayscale</Configuration>
+			<Platform>x64</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Debug Grayscale|Win32">
+			<Configuration>Debug Grayscale</Configuration>
+			<Platform>Win32</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Release Grayscale|Win32">
+			<Configuration>Release Grayscale</Configuration>
+			<Platform>Win32</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Debug Grayscale|ARM64">
+			<Configuration>Debug Grayscale</Configuration>
+			<Platform>ARM64</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Release Grayscale|ARM64">
+			<Configuration>Release Grayscale</Configuration>
+			<Platform>ARM64</Platform>
+		</ProjectConfiguration>
+	</ItemGroup>
+	<PropertyGroup Condition="$(Configuration.StartsWith('Debug'))" Label="Configuration">
+		<UseDebugLibraries>true</UseDebugLibraries>
+		<LinkIncremental>true</LinkIncremental>
+	</PropertyGroup>
+	<PropertyGroup Condition="$(Configuration.StartsWith('Release'))" Label="Configuration">
+		<UseDebugLibraries>false</UseDebugLibraries>
+		<WholeProgramOptimization>true</WholeProgramOptimization>
+		<LinkIncremental>false</LinkIncremental>
+	</PropertyGroup>
+	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+	<ImportGroup Label="PropertySheets">
+		<Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+	</ImportGroup>
+	<ItemDefinitionGroup>
+		<Link>
+			<SubSystem>Console</SubSystem>
+			<GenerateDebugInformation>true</GenerateDebugInformation>
+			<AdditionalDependencies>setupapi.lib;winmm.lib;imm32.lib;version.lib;%(AdditionalDependencies)</AdditionalDependencies>
+		</Link>
+		<Manifest>
+			<EnableDpiAwareness>PerMonitorHighDPIAware</EnableDpiAwareness>
+		</Manifest>
+	</ItemDefinitionGroup>
+	<ItemDefinitionGroup Condition="$(Configuration.StartsWith('Debug'))">
+		<ClCompile>
+			<PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+			<RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+		</ClCompile>
+		<Link>
+			<AdditionalDependencies>%(AdditionalDependencies);SDL2maind.lib</AdditionalDependencies>
+		</Link>
+	</ItemDefinitionGroup>
+	<ItemDefinitionGroup Condition="$(Configuration.StartsWith('Release'))">
+		<ClCompile>
+			<PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+			<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+		</ClCompile>
+		<Link>
+			<EnableCOMDATFolding>true</EnableCOMDATFolding>
+			<OptimizeReferences>true</OptimizeReferences>
+			<AdditionalDependencies>%(AdditionalDependencies);SDL2main.lib</AdditionalDependencies>
+		</Link>
+	</ItemDefinitionGroup>
+	<PropertyGroup Label="Vcpkg">
+		<VcpkgEnableManifest>true</VcpkgEnableManifest>
+		<VcpkgUseStatic>true</VcpkgUseStatic>
+	</PropertyGroup>
+	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+	<ItemGroup>
+		<ClCompile Condition="!$(Configuration.EndsWith('Grayscale'))" Include="bf16.c" />
+		<ClCompile Condition="$(Configuration.EndsWith('Grayscale'))" Include="bf16_grayscale.c" />
+	</ItemGroup>
+</Project>
